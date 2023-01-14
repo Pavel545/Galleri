@@ -5,16 +5,6 @@ export const Box = styled.div`
   display: flex;
 `;
 const data = (poz) => {
-  if (poz === "first") {
-    return css`
-      border-radius: 20px 0 0 20px;
-    `;
-  }
-  if (poz === "end") {
-    return css`
-      border-radius: 0 20px 20px 0;
-    `;
-  }
   if (poz === "active") {
     return css`
       background: #ffffff;
@@ -24,20 +14,20 @@ const data = (poz) => {
   }
   return css``;
 };
-const Glob = (globalPoz,Li ) => {
+const Glob = (globalPoz, Li) => {
   if (!globalPoz) {
-    return css``
+    return css``;
   }
   if (globalPoz === 1) {
     return css`
-    opacity: 0.5;
-    pointer-events: none;
+      opacity: 0.5;
+      pointer-events: none;
     `;
   }
-  if (Li===globalPoz) {
+  if (Li === globalPoz) {
     return css`
-    opacity: 0.5;
-    pointer-events: none;
+      opacity: 0.5;
+      pointer-events: none;
     `;
   }
 
@@ -67,7 +57,17 @@ export const Button = styled.button`
   &:hover {
     background: #464646;
   }
+  &:nth-child(1) {
+    border-radius: 20px 0 0 20px;
+  }
+  &:nth-last-child(1) {
+    border-radius: 0 20px 20px 0;
+  }
+  // &:active {
+  //   background: #ffffff;
+  //   color: #000000;
+  //   border: 1px solid #ffffff;
+  // }
   ${(props) => data(props.poz)}
   ${(props) => Glob(props.globalPoz, props.Li)}
-
 `;

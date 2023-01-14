@@ -34,13 +34,27 @@ export const Select = styled.select`
   background: #0c0c0c;
   border: 1px solid #ffffff;
   border-radius: 8px;
-  
+
   display: flex;
   align-items: center;
 
   color: #ffffff;
+  box-sizing: border-box;
 `;
 
 export const Option = styled.option`
-  
+  background: #0c0c0c;
+  border: 1px solid #ffffff;
+
+  background-color: transparent;
+  border: 0;
+  padding-right: 15px;
+  height: 31px;
+  width: 220px;
+  &:nth-child(1) {
+    border-radius: 20px 0 0 20px;
+  }
+  &:nth-last-child(1) {
+    border-radius: 0 20px 20px 0;
+  }
 `;
