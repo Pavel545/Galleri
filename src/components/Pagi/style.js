@@ -1,15 +1,18 @@
 import styled, { css } from "styled-components";
+import { useThemeContext } from "../../context/theme";
 
 export const Box = styled.div`
   padding-top: 45px;
   display: flex;
 `;
-const data = (poz) => {
+const Data = (poz) => {
+  const { theme } = useThemeContext();
+
   if (poz === "active") {
     return css`
-      background: #ffffff;
-      color: #000000;
-      border: 1px solid #ffffff;
+      background: ${theme.color};
+      color: ${theme.background};
+      border: 1px solid ${theme.color};
     `;
   }
   return css``;
@@ -33,9 +36,21 @@ const Glob = (globalPoz, Li) => {
 
   return css``;
 };
+const Themes = () => {
+  const { theme } = useThemeContext();
+
+  return css`
+    background: ${theme.background};
+    color: ${theme.color};
+    border: 1px solid ${theme.color};
+    &:hover {
+      background: ${theme.hover};
+    }
+  `;
+};
 export const Button = styled.button`
   box-sizing: border-box;
-
+  ${(props) => Themes()}
   width: 11.27px;
   height: 20.5px;
   left: 256.35px;
@@ -47,27 +62,16 @@ export const Button = styled.button`
   font-size: 18px;
   line-height: 20px;
 
-  color: #ffffff;
-
   width: 41px;
   height: 41px;
 
-  background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  &:hover {
-    background: #464646;
-  }
+  
   &:nth-child(1) {
-    border-radius: 20px 0 0 20px;
+    border-radius: 5px 0 0 5px;
   }
   &:nth-last-child(1) {
-    border-radius: 0 20px 20px 0;
+    border-radius: 0 5px 5px 0;
   }
-  // &:active {
-  //   background: #ffffff;
-  //   color: #000000;
-  //   border: 1px solid #ffffff;
-  // }
-  ${(props) => data(props.poz)}
+  ${(props) => Data(props.poz)}
   ${(props) => Glob(props.globalPoz, props.Li)}
 `;

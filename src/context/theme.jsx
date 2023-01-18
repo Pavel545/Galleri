@@ -4,11 +4,14 @@ export const themes={
     light:{  
         background: "#FFFFFF",
         color: "#000000",
-
+        hover:"#EDEDED",
+        border:  "rgba(0, 0, 0, 0.3)",
     },
     dark:{
         background: "#000000",
         color: "#FFFFFF",
+        hover:"#464646",
+        border:  "#FFFFFF",
     },
 }
 export const ThemeContext = React.createContext({
