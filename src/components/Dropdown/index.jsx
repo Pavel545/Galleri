@@ -1,4 +1,3 @@
-import { useGetLocationsQuery } from "../../services/todo";
 import * as S from "./style";
 
 

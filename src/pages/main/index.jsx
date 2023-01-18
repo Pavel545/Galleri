@@ -3,10 +3,18 @@ import { Gallery } from "../../components/gallery/index.jsx";
 import { Pagination } from "../../components/Pagi/index.jsx";
 import { Sorting } from "../../components/sortingGallery";
 import { useThemeContext } from "../../context/theme.jsx";
-import { useGetAllPictureQuery } from "../../services/todo.js";
+import { useDispatch, useSelector } from "react-redux";
+
 import * as S from "./style";
+import { todosSelector } from "../../store/selectors/todo.js";
+import { allPictures } from "../../store/actions/thunk/todo.js";
 
 export function MainGallery() {
+  const data =useSelector(todosSelector)
+  const dispatch= useDispatch()
+  dispatch(allPictures())
+
+
   const [isTheme, setIsTheme] = useState(false);
   const [step, setStep] = useState(1);
 
@@ -21,18 +29,10 @@ export function MainGallery() {
   const { toggleTheme, theme } = useThemeContext();
 
   const noteOnPages = 12;
-  const { data, error, isLoading } = useGetAllPictureQuery();
 
-  if (isLoading) {
-    return console.log("Loading");
-  }
-
-  if (error) {
-    return <p>{error.message}</p>;
-  }
 
   const Pages = sliceIntoChunks(data, noteOnPages);
-  console.log(loc);
+  console.log(data);
   return (
     <S.Main style={{ background: theme.background, color: theme.color }}>
       <S.Header style={{ background: theme.background }}>

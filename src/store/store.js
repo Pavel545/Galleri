@@ -1,11 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {todoPicture} from '../services/todo';
+import todoReducer from "./reducers/todo";
+import thunk from "redux-thunk";
 
 export const store = configureStore({
   reducer: {
-    [todoPicture.reducerPath]: todoPicture.reducer,
+    todo: todoReducer,
   },
-
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(todoPicture.middleware),
+  middleware: [thunk],
 });

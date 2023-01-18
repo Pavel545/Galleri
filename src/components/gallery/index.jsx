@@ -1,20 +1,18 @@
-import { useGetPageLimitQuery } from "../../services/todo";
 
+import { useDispatch, useSelector } from "react-redux";
+import { allPictures } from "../../store/actions/thunk/todo";
+import { todosSelector } from "../../store/selectors/todo";
 import { Picture } from "../Picture";
 import * as S from "./style";
 export function Gallery({author,loc,currentPage}) {
-  const { data, error, isLoading } = useGetPageLimitQuery({
-    pages: currentPage,
-    limit: 12,
-  });
+  
+  const data =useSelector(todosSelector)
+  const dispatch= useDispatch()
+  dispatch(allPictures({
+    pages:currentPage, limit:12,
+  }))
 
-  if (isLoading) {
-    return console.log("Loading");
-  }
-
-  if (error) {
-    return <p>{error.message}</p>;
-  }
+ 
   const none = ()=>{}
   console.log(data);
 
@@ -36,9 +34,7 @@ export function Gallery({author,loc,currentPage}) {
   return (
     <S.Box>
       {data.map((todo) =>
-        author.map((aut) =>
-        (todo.authorId===aut.id)? 
-        a1(todo,aut):none())
+      <Picture key={todo.id} todo={todo}author={todo.authorId} loc={todo.locationId} />
         
         
       )}
