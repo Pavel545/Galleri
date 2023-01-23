@@ -12,15 +12,13 @@ function Content() {
       return;
     }
     setCurrentTheme(themes.dark);
-  };  
+  };
   const { theme } = useThemeContext();
-
 
   return (
     <ThemeContext.Provider value={{ theme: currentTheme, toggleTheme }}>
-      <GlobalStyles  style={{ background: theme.background }} />
-
-      <MainGallery />
+        <GlobalStyles style={{ background: theme.background }} />
+        <MainGallery />
     </ThemeContext.Provider>
   );
 }

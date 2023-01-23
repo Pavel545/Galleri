@@ -3,16 +3,12 @@ import { Gallery } from "../../components/gallery/index.jsx";
 import { Pagination } from "../../components/Pagi/index.jsx";
 import { Sorting } from "../../components/sortingGallery";
 import { useThemeContext } from "../../context/theme.jsx";
-import { useDispatch, useSelector } from "react-redux";
+import { useGetAllPicturesQuery } from "../../servise/todo.js";
 
 import * as S from "./style";
-import { todosSelector } from "../../store/selectors/todo.js";
-import { allPictures } from "../../store/actions/thunk/todo.js";
 
 export function MainGallery() {
-  const data =useSelector(todosSelector)
-  const dispatch= useDispatch()
-  dispatch(allPictures())
+  const { data, error, isLoading } = useGetAllPicturesQuery();
 
 
   const [isTheme, setIsTheme] = useState(false);
@@ -28,6 +24,16 @@ export function MainGallery() {
   };
   const { toggleTheme, theme } = useThemeContext();
 
+   if (isLoading) {
+     return <p>Loading...</p>;
+   }
+
+   if (error) {
+     return <p>{error.message}</p>;
+   }
+
+   
+console.log(data);
   const noteOnPages = 12;
 
 

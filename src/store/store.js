@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todoReducer from "./reducers/todo";
-import thunk from "redux-thunk";
+import { todoApi } from "../servise/todo";
 
 export const store = configureStore({
   reducer: {
-    todo: todoReducer,
+    [todoApi.reducerPath]: todoApi.reducer,
   },
-  middleware: [thunk],
+
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(todoApi.middleware),
 });
+

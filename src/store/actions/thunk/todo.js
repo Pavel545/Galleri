@@ -9,11 +9,11 @@ import {
 
 const BASE_URL = "https://test-front.framework.team";
 
-export const allPictures = () => async (dispatch) => {
+export const allPictures = () =>  (dispatch) => {
     dispatch(allTodosStarted());
   
     try {
-      const { data } = await axios.get(`${BASE_URL}/paintings`);
+      const { data } =  axios.get(`${BASE_URL}/paintings`);
   
       dispatch(allTodosSuccess(data));
     } catch (error) {

@@ -18,6 +18,18 @@ export const Box = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   border-radius: 20px;
+  @media (max-width: 1024px) {
+    width: 285px;
+    height: 230px;
+  }
+  @media (max-width: 768px) {
+    width: 330px;
+    height: 249px;
+  }
+  @media (max-width: 320px) {
+    width: 265px;
+    height: 205px;
+  }
 `;
 export const Name = styled.div`
   background: rgba(255, 255, 255, 0);
@@ -25,7 +37,7 @@ export const Name = styled.div`
   font-size: 16px;
 `;
 export const Str = styled.div`
-padding-top:8px;
+  padding-top: 8px;
 
   display: flex;
   gap: 8px;
@@ -45,11 +57,9 @@ export const Content = styled.div`
 `;
 export const Text_op = styled.div`
   background: rgba(255, 255, 255, 0);
-  
-  
 `;
 export const Text = styled.div`
-overflow: hidden;
+  overflow: hidden;
   width: 360px;
   height: 30px;
   :hover {

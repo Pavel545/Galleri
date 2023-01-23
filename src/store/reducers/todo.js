@@ -22,12 +22,11 @@ export default function todoReducer(state = initialState, action) {
     }
 
     case ALL_TODO_STARTED: {
-      state=null
       return {
         ...state,
         loading: false,
-        error: null,
-        todos: [...action.payload.todos],
+        error: true,
+        todos:[...action.payload.todos]
       };
     }
 
