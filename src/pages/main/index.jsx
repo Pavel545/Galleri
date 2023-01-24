@@ -1,21 +1,28 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Gallery } from "../../components/gallery/index.jsx";
 import { Pagination } from "../../components/Pagi/index.jsx";
 import { Sorting } from "../../components/sortingGallery";
 import { useThemeContext } from "../../context/theme.jsx";
-import { useGetAllPicturesQuery } from "../../servise/todo.js";
 
 import * as S from "./style";
-
+import { todosSelector } from "../../store/selectors/todo.js";
+import { allPictures } from "../../store/actions/thunk/todo.js";
+import { useEffect } from "react";
 export function MainGallery() {
-  const { data, error, isLoading } = useGetAllPicturesQuery();
-
+  const data = useSelector(todosSelector);
+  const dispatch = useDispatch();
+  let a =0;
+  useEffect(() => {
+    if (a===0) {
+      dispatch(allPictures());
+      a++;
+    }
+  }, []);
 
   const [isTheme, setIsTheme] = useState(false);
   const [step, setStep] = useState(1);
-
-  const [author, setAuthor] = useState();
-  const [loc, setLoc] = useState();
+  const [filter, setFilter] = useState();
 
   const toggleIsTheme = () => {
     setIsTheme(!isTheme);
@@ -24,25 +31,13 @@ export function MainGallery() {
   };
   const { toggleTheme, theme } = useThemeContext();
 
-   if (isLoading) {
-     return <p>Loading...</p>;
-   }
-
-   if (error) {
-     return <p>{error.message}</p>;
-   }
-
-   
-console.log(data);
   const noteOnPages = 12;
 
-
-  const Pages = sliceIntoChunks(data, noteOnPages);
-  console.log(data);
+  const Pages = sliceIntoChunks(data.all, noteOnPages);
   return (
     <S.Main style={{ background: theme.background, color: theme.color }}>
       <S.Header style={{ background: theme.background }}>
-        <img  src={process.env.PUBLIC_URL + "/logo.png"} />
+        <img src={process.env.PUBLIC_URL + "/logo.png"} />
         {isTheme ? (
           <img
             onClick={toggleIsTheme}
@@ -55,8 +50,11 @@ console.log(data);
           />
         )}
       </S.Header>
-      <Sorting setLoc={setLoc} setAuthor={setAuthor} />
-      <Gallery loc={loc} currentPage={step} author={author} />
+      <Sorting setFilter={setFilter} />
+      <Gallery
+        setFilter={setFilter}
+        currentPage={step}
+      />
       <Pagination
         setStep={setStep}
         currentPage={step}

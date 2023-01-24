@@ -8,13 +8,14 @@ export const Dropdown = (props) => {
 
   const [isOpen, setOpen] = useState(false);
   const [Lab, setLab] = useState(label);
-
+ 
   const handleOpen = () => setOpen(!isOpen);
   const ResetSort=()=>setLab(label)
   useEffect(() => {
+    
     console.log(Lab);
   });
-  if (data && data[0].name) {
+  if (label === "Author") {
     return (
       <S.Select onClick={handleOpen}>
         <S.SelectHead><S.ElementMenu>{Lab}</S.ElementMenu><S.ButtonReset onClick={ResetSort}/><S.ButtonFix/></S.SelectHead>
@@ -35,7 +36,7 @@ export const Dropdown = (props) => {
       </S.Select>
     );
   }
-  if (data && data[0].location) {
+  if (label === "Location") {
     return (
       <S.Select onClick={handleOpen}>
         <S.SelectHead><S.ElementMenu>{Lab}</S.ElementMenu><S.ButtonReset onClick={ResetSort}/><S.ButtonFix/></S.SelectHead>

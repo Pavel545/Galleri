@@ -46,7 +46,7 @@ export const Input = styled.input`
   height: 45px;
 
   border-radius: 8px;
-
+  width: 265px;
   display: flex;
   align-items: center;
   padding-left: 5px;

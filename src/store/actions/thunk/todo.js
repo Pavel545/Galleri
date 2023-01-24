@@ -4,16 +4,18 @@ import {
   allTodosStarted,
   allTodosSuccess,
   allTodosFailure,
-  allAuthorSuccess
+  pagesTodosSuccess,
+  allAuthorSuccess,
+  allLocationSuccess,
 } from "../creators/todo";
 
 const BASE_URL = "https://test-front.framework.team";
 
-export const allPictures = () =>  (dispatch) => {
+export const allPictures = () => async (dispatch) => {
     dispatch(allTodosStarted());
   
     try {
-      const { data } =  axios.get(`${BASE_URL}/paintings`);
+      const { data } = await axios.get(`${BASE_URL}/paintings`);
   
       dispatch(allTodosSuccess(data));
     } catch (error) {
@@ -26,7 +28,7 @@ export const dataPages = ({ pages, limit }) => async (dispatch) => {
   try {
     const { data } = await axios.get(`${BASE_URL}/paintings?_page=${pages}&_limit=${limit}`);
 
-    dispatch(allTodosSuccess(data));
+    dispatch(pagesTodosSuccess(data));
   } catch (error) {
     dispatch(allTodosFailure(error));
   }
@@ -48,7 +50,7 @@ export const allLocations = () => async (dispatch) => {
   try {
     const { data } = await axios.get(`${BASE_URL}/locations`);
 
-    dispatch(allTodosSuccess(data));
+    dispatch(allLocationSuccess(data));
   } catch (error) {
     dispatch(allTodosFailure(error));
   }

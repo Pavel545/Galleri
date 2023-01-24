@@ -1,7 +1,7 @@
 const todoSelector = (store) => store.todo;
 
 export const todosSelector = (store) => {
-  return todoSelector(store)?.todos || [];
+  return todoSelector(store)?.todos || {};
 };
 
 export const todosLoadingSelector = (store) => todoSelector(store)?.loading;
