@@ -1,26 +1,40 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Gallery } from "../../components/gallery/index.jsx";
 import { Pagination } from "../../components/Pagi/index.jsx";
 import { Sorting } from "../../components/sortingGallery";
 import { useThemeContext } from "../../context/theme.jsx";
-import { useDispatch, useSelector } from "react-redux";
 
 import * as S from "./style";
 import { todosSelector } from "../../store/selectors/todo.js";
-import { allPictures } from "../../store/actions/thunk/todo.js";
-
+import { allPictures, dataFilter, filterAuthor, filterLocations } from "../../store/actions/thunk/todo.js";
+import { useEffect } from "react";
 export function MainGallery() {
-  const data =useSelector(todosSelector)
-  const dispatch= useDispatch()
-  dispatch(allPictures())
-
-
+  const [locationFilter,setLocationFilter]=useState()
+  const [authorFilter,setAuthorFilter]=useState()
+  const data = useSelector(todosSelector);
+  const dispatch = useDispatch();
+  let a =0;
+  useEffect(() => {
+    if (a===0) {
+      dispatch(allPictures());
+      a++;
+    }
+  }, []);
+ 
   const [isTheme, setIsTheme] = useState(false);
   const [step, setStep] = useState(1);
-
-  const [author, setAuthor] = useState();
-  const [loc, setLoc] = useState();
-
+  const [filter, setFilter] = useState();
+  useEffect(() => {
+    console.log(filter);
+    if (filter) {
+      dispatch(
+        dataFilter({
+          filter: filter,
+        })
+      );
+    }
+  }, [filter]);
   const toggleIsTheme = () => {
     setIsTheme(!isTheme);
     toggleTheme();
@@ -29,15 +43,31 @@ export function MainGallery() {
   const { toggleTheme, theme } = useThemeContext();
 
   const noteOnPages = 12;
-
-
-  const Pages = sliceIntoChunks(data, noteOnPages);
-  console.log(data);
+  const Pages = sliceIntoChunks(data.all, noteOnPages);
+  // const Pages = 3;
+  useEffect(() => {
+    if (authorFilter) {
+      dispatch(
+        filterAuthor({
+          filter: authorFilter,
+        })
+      );
+    }
+  }, [authorFilter]);
+  useEffect(() => {
+    if (locationFilter) {
+      dispatch(
+        filterLocations({
+          filter: locationFilter,
+        })
+      );
+    }
+  }, [locationFilter]);
   return (
     <S.Main style={{ background: theme.background, color: theme.color }}>
       <S.Header style={{ background: theme.background }}>
-        <img  src={process.env.PUBLIC_URL + "/logo.png"} />
-        {isTheme ? (
+        <img src={process.env.PUBLIC_URL + "/logo.png"} />
+        {!isTheme ? (
           <img
             onClick={toggleIsTheme}
             src={process.env.PUBLIC_URL + "/VectorBlack.png"}
@@ -49,8 +79,11 @@ export function MainGallery() {
           />
         )}
       </S.Header>
-      <Sorting setLoc={setLoc} setAuthor={setAuthor} />
-      <Gallery loc={loc} currentPage={step} author={author} />
+      <Sorting setAuthorFilter={setAuthorFilter} setLocationFilter={setLocationFilter} setFilter={setFilter} />
+      <Gallery
+        setFilter={setFilter}
+        currentPage={step}
+      />
       <Pagination
         setStep={setStep}
         currentPage={step}

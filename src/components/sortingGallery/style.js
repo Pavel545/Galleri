@@ -24,7 +24,7 @@ export const Box = styled.div`
   display: flex;
   gap: 20px;
   justify-content: space-between;
-  align-items: flex-start;;
+  align-items: flex-start;
   padding-bot: 35px;
 
   font-family: "Roboto";
@@ -34,19 +34,33 @@ export const Box = styled.div`
   line-height: 15px;
   height: 75px;
 
+  grid-column: 1/-1;
+  @media (max-width: 320px) {
+    flex-direction: column;
+    height: 243px;
+
+  }
 `;
 export const Input = styled.input`
   ${(props) => Themes()}
-  width: 265px;
   height: 45px;
 
   border-radius: 8px;
-
+  width: 265px;
   display: flex;
   align-items: center;
   padding-left: 5px;
+  @media (max-width: 1024px) {
+    width: 220px;
+  }
+  @media (max-width: 768px) {
+    width: 140px;
+  }
+  @media (max-width: 320px) {
+    width: 260px;
+    min-height: 45px;
+  }
 `;
-
 
 export const SelectTitle = styled.div`
   ${(props) => Themes()}

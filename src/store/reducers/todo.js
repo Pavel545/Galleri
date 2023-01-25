@@ -2,32 +2,31 @@ import {
   ALL_TODO_FAILURE,
   ALL_TODO_STARTED,
   ALL_TODO_SUCCESS,
-  ALL_AUTHOR_STARTED,
+  PAGES_TODO_SUCCESS,
+  ALL_AUTHOR_SUCCESS,
+  ALL_LOCATION_SUCCESS,
 } from "../actions/types/todo";
 
 const initialState = {
   loading: false,
   error: null,
-  todos: [],
+  todos: { all: [], pages: [], author: [], location: [] },
 };
 
 export default function todoReducer(state = initialState, action) {
   switch (action.type) {
     case ALL_TODO_FAILURE: {
-      
       return {
         ...state,
-        loading: true,
+        loading: false,
+        error: action.payload.error,
       };
     }
 
     case ALL_TODO_STARTED: {
-      state=null
       return {
         ...state,
-        loading: false,
-        error: null,
-        todos: [...action.payload.todos],
+        loading: true,
       };
     }
 
@@ -35,18 +34,57 @@ export default function todoReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        error: action.payload.error,
-      };
-      case ALL_AUTHOR_STARTED: {
-        return {
-          ...state,
-          loading: false,
-          error: null,
-          todos: [...action.payload.todos],
-        };
-      }
+        error: null,
 
-      default:
-        return state;
+        todos: {
+          all: [...action.payload.todos.all],
+          pages: [...state.todos.pages],
+          author: [...state.todos.author],
+          location: [...state.todos.location],
+        },
+      };
+
+    case PAGES_TODO_SUCCESS:
+      return {
+        ...state,
+
+        loading: false,
+        error: null,
+        todos: {
+          all: [...state.todos.all],
+          pages: [...action.payload.todos.pages],
+          author: [...state.todos.author],
+          location: [...state.todos.location],
+        },
+      };
+      case ALL_AUTHOR_SUCCESS:
+      return {
+        ...state,
+
+        loading: false,
+        error: null,
+        todos: {
+          all: [...state.todos.all],
+          pages: [...state.todos.pages],
+          author: [...action.payload.todos.author],
+          location: [...state.todos.location],
+        },
+      };
+      case ALL_LOCATION_SUCCESS:
+      return {
+        ...state,
+
+        loading: false,
+        error: null,
+        todos: {
+          all: [...state.todos.all],
+          pages: [...state.todos.pages],
+          author: [...state.todos.author],
+          location: [...action.payload.todos.location],
+        },
+      };
+
+    default:
+      return state;
   }
 }

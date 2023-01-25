@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 import { useThemeContext } from "../../context/theme";
 
-const Themes = (hover) => {
+const Themes = (key) => {
   const { theme } = useThemeContext();
-  if (hover === "hover") {
+  if (key === "hover") {
     return css`
       background: ${theme.background};
       color: ${theme.color};
@@ -12,6 +12,16 @@ const Themes = (hover) => {
         background: ${theme.color};
         color: ${theme.background};
       }
+      &:nth-child(1) {
+        border-bot: 1px solid ${theme.border};
+        pointer-events: none;
+        border-radius: 8px;
+      }
+    `;
+  }
+  if (key === "button") {
+    return css`
+      border-top: 6px solid ${theme.button};
     `;
   }
   return css`
@@ -22,30 +32,28 @@ const Themes = (hover) => {
 };
 export const Select = styled.div`
   ${(props) => Themes()}
-  
-  width: 265px;
-  min-height: 45px;
-  max-height:305px;
-  border-radius:8px;
+  position: relative;
+
+  min-width: 265px;
+  max-height: 305px;
+
   font-weight: 400;
   font-size: 13px;
   line-height: 15px;
   display: flex;
   align-items: flex-start;
-  padding-left:15px;
   justify-content: center;
   flex-direction: column;
-  &:nth-last-child(1) {
-    border-radius:  0 0 8px 8px;
+  border-radius: 8px;
+  @media (max-width: 1024px) {
+    min-width: 220px;
   }
-  
-  &:nth-child(1) {
-    border-radius: 8px 8px 0 0 ;
+  @media (max-width: 768px) {
+    min-width: 160px;
   }
-  :first-of-type{
-    border-radius: 8px ;
+  @media (max-width: 320px) {
+    width: 265px;
   }
-  
 `;
 export const Menu = styled.div`
   ${(props) => Themes()}
@@ -70,10 +78,8 @@ export const Menu = styled.div`
     transform: matrix(1, 0, 0, -1, 0, 0);
   }
 
-  width: 280px;
-  min-height: 45px;
-  max-height:305px;
-  border-radius:8px;
+  width: 264px;
+  min-height: 205px;
   font-weight: 400;
   font-size: 13px;
   line-height: 15px;
@@ -82,29 +88,115 @@ export const Menu = styled.div`
   justify-content: center;
   flex-direction: column;
   &:nth-last-child(1) {
-    border-radius:  0 0 8px 8px;
+    border-radius: 0 0 8px 8px;
   }
-  
+
   &:nth-child(1) {
-    border-radius: 8px 8px 0 0 ;
+    border-radius: 8px 8px 0 0;
   }
-  :first-of-type{
-    border-radius: 8px ;
+  :first-of-type {
+    border-radius: 8px;
   }
-  
+  @media (max-width: 1024px) {
+    width: 220px;
+  }
+  @media (max-width: 768px) {
+    width: 160px;
+  }
+  @media (max-width: 320px) {
+    width: 264px;
+  }
 `;
 export const ElementMenu = styled.div`
   ${(props) => Themes("hover")}
 
-  width: 265px;
+  width: 240px;
+
   min-height: 45px;
 
-
- 
   display: flex;
   align-items: center;
-  padding-left:15px;
-  border:none;
-  
-`;
+  padding: 2px;
 
+  padding-left: 15px;
+  border: none;
+  @media (max-width: 1024px) {
+    width: 220px;
+  }
+  @media (max-width: 768px) {
+    width: 140px;
+  }
+  @media (max-width: 320px) {
+    width: 265px;
+  }
+`;
+export const Input = styled.input`
+  ${(props) => Themes()}
+  width: 95px;
+  height: 45px;
+
+  background: #ffffff;
+  border-radius: 8px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+
+  color: rgba(0, 0, 0, 0.3);
+`;
+export const BoxAge = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-direction: row;
+  padding: 15px;
+`;
+export const ButtonFix = styled.div`
+  ${(props) => Themes("button")}
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+`;
+export const ButtonReset = styled.div`
+  position: relative;
+  height: 8px;
+  width: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 1.5px;
+    background-color: #555555;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+`;
+export const SelectHead = styled.div`
+  display: flex;
+  max-width: 255px;
+  align-items: center;
+  gap: 5px;
+  @media (max-width: 1024px) {
+    width: 220px;
+  }
+  @media (max-width: 768px) {
+    width: 160px;
+  }
+  @media (max-width: 320px) {
+    width: 265px;
+  }
+`;

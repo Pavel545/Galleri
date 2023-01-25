@@ -4,6 +4,12 @@ import { useThemeContext } from "../../context/theme";
 export const Box = styled.div`
   padding-top: 45px;
   display: flex;
+
+  grid-column:1/6;
+  @media (max-width: 320px) {
+    grid-column:1/-1;
+
+  }
 `;
 const Data = (poz) => {
   const { theme } = useThemeContext();
