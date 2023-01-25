@@ -9,13 +9,14 @@ export function Gallery({ setFilter, author, loc, currentPage }) {
   const data = useSelector(todosSelector);
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log(currentPage);
     dispatch(
       dataPages({
         pages: currentPage,
         limit: 12,
       })
     );
-  }, []);
+  }, [currentPage]);
   const none = () => {};
 
   const a1 = (todo, aut) => {

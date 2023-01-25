@@ -55,3 +55,59 @@ export const allLocations = () => async (dispatch) => {
     dispatch(allTodosFailure(error));
   }
 };
+export const dataFilter = ({ filter }) => async (dispatch) => {
+  dispatch(allTodosStarted());
+
+  try {
+    const { data } = await axios.get(`${BASE_URL}/paintings?q=${filter}`);
+
+    dispatch(pagesTodosSuccess(data));
+    dispatch(allTodosSuccess(data));
+
+
+  } catch (error) {
+    dispatch(allTodosFailure(error));
+  }
+};
+export const filterAuthor = ({ filter }) => async (dispatch) => {
+  dispatch(allTodosStarted());
+
+  try {
+    const { data } = await axios.get(`${BASE_URL}/paintings?authorId=${filter}`);
+
+    dispatch(pagesTodosSuccess(data));
+    dispatch(allTodosSuccess(data));
+
+
+  } catch (error) {
+    dispatch(allTodosFailure(error));
+  }
+};
+export const filterLocations = ({ gte,lte }) => async (dispatch) => {
+  dispatch(allTodosStarted());
+
+  try {
+    const { data } = await axios.get(`${BASE_URL}/paintings?_gte=${gte}&_lte=${lte}`);
+
+    dispatch(pagesTodosSuccess(data));
+    dispatch(allTodosSuccess(data));
+
+
+  } catch (error) {
+    dispatch(allTodosFailure(error));
+  }
+};
+export const filterCreated = ({ filter }) => async (dispatch) => {
+  dispatch(allTodosStarted());
+
+  try {
+    const { data } = await axios.get(`${BASE_URL}/paintings?locationId=${filter}`);
+
+    dispatch(pagesTodosSuccess(data));
+    dispatch(allTodosSuccess(data));
+
+
+  } catch (error) {
+    dispatch(allTodosFailure(error));
+  }
+};

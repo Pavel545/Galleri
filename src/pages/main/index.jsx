@@ -7,9 +7,11 @@ import { useThemeContext } from "../../context/theme.jsx";
 
 import * as S from "./style";
 import { todosSelector } from "../../store/selectors/todo.js";
-import { allPictures } from "../../store/actions/thunk/todo.js";
+import { allPictures, dataFilter, filterAuthor, filterLocations } from "../../store/actions/thunk/todo.js";
 import { useEffect } from "react";
 export function MainGallery() {
+  const [locationFilter,setLocationFilter]=useState()
+  const [authorFilter,setAuthorFilter]=useState()
   const data = useSelector(todosSelector);
   const dispatch = useDispatch();
   let a =0;
@@ -19,11 +21,20 @@ export function MainGallery() {
       a++;
     }
   }, []);
-
+ 
   const [isTheme, setIsTheme] = useState(false);
   const [step, setStep] = useState(1);
   const [filter, setFilter] = useState();
-
+  useEffect(() => {
+    console.log(filter);
+    if (filter) {
+      dispatch(
+        dataFilter({
+          filter: filter,
+        })
+      );
+    }
+  }, [filter]);
   const toggleIsTheme = () => {
     setIsTheme(!isTheme);
     toggleTheme();
@@ -32,13 +43,31 @@ export function MainGallery() {
   const { toggleTheme, theme } = useThemeContext();
 
   const noteOnPages = 12;
-
   const Pages = sliceIntoChunks(data.all, noteOnPages);
+  // const Pages = 3;
+  useEffect(() => {
+    if (authorFilter) {
+      dispatch(
+        filterAuthor({
+          filter: authorFilter,
+        })
+      );
+    }
+  }, [authorFilter]);
+  useEffect(() => {
+    if (locationFilter) {
+      dispatch(
+        filterLocations({
+          filter: locationFilter,
+        })
+      );
+    }
+  }, [locationFilter]);
   return (
     <S.Main style={{ background: theme.background, color: theme.color }}>
       <S.Header style={{ background: theme.background }}>
         <img src={process.env.PUBLIC_URL + "/logo.png"} />
-        {isTheme ? (
+        {!isTheme ? (
           <img
             onClick={toggleIsTheme}
             src={process.env.PUBLIC_URL + "/VectorBlack.png"}
@@ -50,7 +79,7 @@ export function MainGallery() {
           />
         )}
       </S.Header>
-      <Sorting setFilter={setFilter} />
+      <Sorting setAuthorFilter={setAuthorFilter} setLocationFilter={setLocationFilter} setFilter={setFilter} />
       <Gallery
         setFilter={setFilter}
         currentPage={step}

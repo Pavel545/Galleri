@@ -4,17 +4,23 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 
 export const Dropdown = (props) => {
-  const { label, data } = props;
+  const { label, data,setLocationFilter,setAuthorFilter } = props;
 
   const [isOpen, setOpen] = useState(false);
   const [Lab, setLab] = useState(label);
  
   const handleOpen = () => setOpen(!isOpen);
   const ResetSort=()=>setLab(label)
-  useEffect(() => {
-    
-    console.log(Lab);
-  });
+  const sortLoc =({name,id})=>{
+    setLab(name);
+    setLocationFilter(id)
+  }
+  const sortAuthor =({name,id})=>{
+    setLab(name);
+    setAuthorFilter(id)
+  }
+  
+  
   if (label === "Author") {
     return (
       <S.Select onClick={handleOpen}>
@@ -24,7 +30,7 @@ export const Dropdown = (props) => {
           <S.Menu>
             {data.map((todo) => (
               <S.ElementMenu
-                onClick={() => setLab(todo.name)}
+                onClick={() => sortAuthor({mame:todo.name,id:todo.id})}
                 value={todo.name}
                 key={todo.id}
               >
@@ -44,7 +50,7 @@ export const Dropdown = (props) => {
           <S.Menu>
             {data.map((todo) => (
               <S.ElementMenu
-                onClick={() => setLab(todo.location)}
+                onClick={() => sortLoc({name:todo.location,id:todo.id}) }
                 value={todo.location}
                 key={todo.id}
               >
