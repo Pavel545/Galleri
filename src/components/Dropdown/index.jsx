@@ -1,7 +1,6 @@
 import * as S from "./style";
 
-import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const Dropdown = (props) => {
   const { label, data,setLocationFilter,setAuthorFilter } = props;
@@ -30,7 +29,7 @@ export const Dropdown = (props) => {
           <S.Menu>
             {data.map((todo) => (
               <S.ElementMenu
-                onClick={() => sortAuthor({mame:todo.name,id:todo.id})}
+                onClick={() => sortAuthor({name:todo.name,id:todo.id})}
                 value={todo.name}
                 key={todo.id}
               >
