@@ -1,11 +1,9 @@
 import { useEffect } from "react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   allAuthor,
   allLocations,
-  filterAuthor,
-  filterLocations,
 } from "../../store/actions/thunk/todo";
 import { todosSelector } from "../../store/selectors/todo";
 import { Dropdown } from "../Dropdown";
@@ -25,7 +23,7 @@ export function Sorting({ setAuthorFilter, setLocationFilter, setFilter }) {
 
       a++;
     }
-  }, []);
+  });
 
   return (
     <S.Box>

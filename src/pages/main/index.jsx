@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Gallery } from "../../components/gallery/index.jsx";
-import { Pagination } from "../../components/Pagi/index.jsx";
+import { Pagination } from "../../components/Pagination/index.jsx";
 import { Sorting } from "../../components/sortingGallery";
 import { useThemeContext } from "../../context/theme.jsx";
 
@@ -25,7 +25,7 @@ export function MainGallery() {
       dispatch(allPictures());
       a++;
     }
-  }, []);
+  });
 
   const [isTheme, setIsTheme] = useState(false);
   const [step, setStep] = useState(1);
@@ -39,7 +39,7 @@ export function MainGallery() {
         })
       );
     }
-  }, [filter]);
+  }, [dispatch,filter]);
   const toggleIsTheme = () => {
     setIsTheme(!isTheme);
     toggleTheme();
@@ -57,7 +57,7 @@ export function MainGallery() {
         })
       );
     }
-  }, [authorFilter]);
+  }, [dispatch,authorFilter]);
   useEffect(() => {
     if (locationFilter) {
       dispatch(
@@ -66,7 +66,7 @@ export function MainGallery() {
         })
       );
     }
-  }, [locationFilter]);
+  }, [dispatch,locationFilter]);
   return (
     <S.Main style={{ background: theme.background, color: theme.color }}>
       <S.Header style={{ background: theme.background }}>
