@@ -57,7 +57,7 @@ export default function todoReducer(state = initialState, action) {
           location: [...state.todos.location],
         },
       };
-      case ALL_AUTHOR_SUCCESS:
+    case ALL_AUTHOR_SUCCESS:
       return {
         ...state,
 
@@ -70,7 +70,7 @@ export default function todoReducer(state = initialState, action) {
           location: [...state.todos.location],
         },
       };
-      case ALL_LOCATION_SUCCESS:
+    case ALL_LOCATION_SUCCESS:
       return {
         ...state,
 

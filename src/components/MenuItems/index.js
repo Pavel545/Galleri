@@ -1,8 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import styled from "styled-components";
 
-
-export const MenuItem = ((props, ref) => {
+export const MenuItem = (props, ref) => {
   const { active, disabled, children, ...rest } = props;
 
   return (
@@ -10,7 +9,7 @@ export const MenuItem = ((props, ref) => {
       {props.children}
     </Root>
   );
-});
+};
 
 const Root = styled.div`
   padding: 5px 10px;

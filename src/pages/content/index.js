@@ -17,8 +17,8 @@ function Content() {
 
   return (
     <ThemeContext.Provider value={{ theme: currentTheme, toggleTheme }}>
-        <GlobalStyles style={{ background: theme.background }} />
-        <MainGallery />
+      <GlobalStyles style={{ background: theme.background }} />
+      <MainGallery />
     </ThemeContext.Provider>
   );
 }

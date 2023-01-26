@@ -14,34 +14,33 @@ export const allTodosStarted = () => ({
 export const allTodosSuccess = (todos) => ({
   type: ALL_TODO_SUCCESS,
   payload: {
-    todos:{
-      all:todos,
+    todos: {
+      all: todos,
     },
   },
 });
 export const pagesTodosSuccess = (todos) => ({
   type: PAGES_TODO_SUCCESS,
   payload: {
-    todos:{
-      pages:todos,
+    todos: {
+      pages: todos,
     },
   },
 });
 
-
 export const allAuthorSuccess = (todos) => ({
   type: ALL_AUTHOR_SUCCESS,
   payload: {
-    todos:{
-      author:todos,
+    todos: {
+      author: todos,
     },
   },
 });
 export const allLocationSuccess = (todos) => ({
   type: ALL_LOCATION_SUCCESS,
   payload: {
-    todos:{
-      location:todos,
+    todos: {
+      location: todos,
     },
   },
 });

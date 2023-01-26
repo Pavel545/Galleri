@@ -1,6 +1,6 @@
 import * as S from "./style";
 
-export function Picture({ todo,author, loc }) {
+export function Picture({ todo, author, loc }) {
   return (
     <S.Box img={todo.imageUrl}>
       <S.Text>

@@ -38,7 +38,6 @@ export const Box = styled.div`
   @media (max-width: 320px) {
     flex-direction: column;
     height: 243px;
-
   }
 `;
 export const Input = styled.input`
