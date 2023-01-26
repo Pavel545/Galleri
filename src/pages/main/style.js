@@ -4,10 +4,8 @@ export const Main = styled.div`
   padding-left: 80px;
   padding-right: 80px;
   padding-bottom: 45px;
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(12, 1fr);
-
-
 
   @media (max-width: 1024px) {
     padding-left: 40px;
@@ -27,5 +25,5 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  grid-column:1/-1;
+  grid-column: 1/-1;
 `;

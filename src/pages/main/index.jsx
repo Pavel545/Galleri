@@ -7,21 +7,26 @@ import { useThemeContext } from "../../context/theme.jsx";
 
 import * as S from "./style";
 import { todosSelector } from "../../store/selectors/todo.js";
-import { allPictures, dataFilter, filterAuthor, filterLocations } from "../../store/actions/thunk/todo.js";
+import {
+  allPictures,
+  dataFilter,
+  filterAuthor,
+  filterLocations,
+} from "../../store/actions/thunk/todo.js";
 import { useEffect } from "react";
 export function MainGallery() {
-  const [locationFilter,setLocationFilter]=useState()
-  const [authorFilter,setAuthorFilter]=useState()
+  const [locationFilter, setLocationFilter] = useState();
+  const [authorFilter, setAuthorFilter] = useState();
   const data = useSelector(todosSelector);
   const dispatch = useDispatch();
-  let a =0;
+  let a = 0;
   useEffect(() => {
-    if (a===0) {
+    if (a === 0) {
       dispatch(allPictures());
       a++;
     }
   }, []);
- 
+
   const [isTheme, setIsTheme] = useState(false);
   const [step, setStep] = useState(1);
   const [filter, setFilter] = useState();
@@ -44,7 +49,6 @@ export function MainGallery() {
 
   const noteOnPages = 12;
   const Pages = sliceIntoChunks(data.all, noteOnPages);
-  // const Pages = 3;
   useEffect(() => {
     if (authorFilter) {
       dispatch(
@@ -79,11 +83,12 @@ export function MainGallery() {
           />
         )}
       </S.Header>
-      <Sorting setAuthorFilter={setAuthorFilter} setLocationFilter={setLocationFilter} setFilter={setFilter} />
-      <Gallery
+      <Sorting
+        setAuthorFilter={setAuthorFilter}
+        setLocationFilter={setLocationFilter}
         setFilter={setFilter}
-        currentPage={step}
       />
+      <Gallery  currentPage={step} />
       <Pagination
         setStep={setStep}
         currentPage={step}

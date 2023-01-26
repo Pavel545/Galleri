@@ -5,7 +5,7 @@ import { todosSelector } from "../../store/selectors/todo";
 import { Picture } from "../Picture";
 
 import * as S from "./style";
-export function Gallery({ setFilter, author, loc, currentPage }) {
+export function Gallery({ currentPage }) {
   const data = useSelector(todosSelector);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -21,19 +21,21 @@ export function Gallery({ setFilter, author, loc, currentPage }) {
 
   const a1 = (todo, aut) => {
     let le = "d";
-    
-      data.location.forEach((loca) => {
-        if (todo.locationId === loca.id) {
-          le = loca;
-        }
-      });
-    
+
+    data.location.forEach((loca) => {
+      if (todo.locationId === loca.id) {
+        le = loca;
+      }
+    });
+
     return <Picture key={todo.id} todo={todo} author={aut} loc={le} />;
   };
   return (
     <S.Box>
       {data.pages.map((todo) =>
-        data.author.map((aut) => (todo.authorId === aut.id ? a1(todo, aut) : none()))
+        data.author.map((aut) =>
+          todo.authorId === aut.id ? a1(todo, aut) : none()
+        )
       )}
     </S.Box>
   );

@@ -5,10 +5,9 @@ export const Box = styled.div`
   padding-top: 45px;
   display: flex;
 
-  grid-column:1/6;
+  grid-column: 1/6;
   @media (max-width: 320px) {
-    grid-column:1/-1;
-
+    grid-column: 1/-1;
   }
 `;
 const Data = (poz) => {
@@ -71,7 +70,6 @@ export const Button = styled.button`
   width: 41px;
   height: 41px;
 
-  
   &:nth-child(1) {
     border-radius: 5px 0 0 5px;
   }
